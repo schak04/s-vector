@@ -4,6 +4,7 @@ Author: Saptaparno Chakraborty
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #define INITIAL_SIZE 0
 
 // components: data (ptr) + size + capacity
