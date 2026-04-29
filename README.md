@@ -12,6 +12,8 @@ Writing a minimal implementation of a dynamic array in C, inspired by C++ STL's 
 
 ![design](./docs/design.png)
 
+> Integer-only for now, for the sake of simplicity.
+
 ---
 
 ## Author
