@@ -8,7 +8,7 @@ Writing a minimal implementation of a dynamic array in C, inspired by C++ STL's 
 
 ---
 
-# Design (Visual Sketch)
+## Design (Visual Sketch)
 
 ![design](./docs/design.png)
 
