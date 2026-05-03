@@ -13,6 +13,8 @@ Writing a minimal implementation of a dynamic array in C, inspired by C++ STL's 
 Coding the dynamic array, and have encountered a segfault.  
 Trying to understand why, and how to debug it.
 
+> Need to learn to use gdb and other debugging tools.
+
 ---
 
 ## Design (Rough Sketch)
