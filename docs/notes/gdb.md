@@ -5,8 +5,11 @@
 It is a debugger for C (and C++).
 
 It allows us to:
-- run the program up to a certain point then stop and print out the values of certain variables at that point
-- step through the program one line at a time and print out the values of each variable after executing each line
+- pause program execution at specific points
+- inspect variables and memory
+- step through execution line by line
+- inspect the call stack after crashes
+- understand why bugs like segmentation faults occur
 
 ---
 
@@ -18,6 +21,21 @@ So for a program file `main.c`:
 
 ```bash
 gcc -g main.c -o main
+```
+
+Useful additonal flags:
+
+```bash
+gcc -g -Wall -Wextra main.c -o main
+```
+
+- `-Wall` enables common warnings
+- `-Wextra` enables additional warnings
+
+For memory-related bugs, AddressSanitizer is extremely useful:
+
+```bash
+gcc -g -fsanitize=address main.c -o main
 ```
 
 ---
@@ -59,6 +77,14 @@ Simply type `quit` or just `q`.
 (gdb) lay asm # shows assembly code
 
 (gdb) lay next # shows next layout based on what we're currently seeing
+
+(gdb) run # runs program inside gdb
+
+(gdb) bt # backtrace (shows call stack) -> used when program crashes
+
+(gdb) next # steps over function
+(gdb) step # steps into function
+(gdb) finish # exits current function
 ```
 
 ---
