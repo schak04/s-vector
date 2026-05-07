@@ -34,6 +34,8 @@ Alternatively, we can start gdb and give it the name of the program executable t
 gdb main # or whatever the name of the executable is
 ```
 
+> Once (gdb) appears, every time a command is used, it can be reused simply by hitting `Enter`.
+
 ### Quitting
 
 Simply type `quit` or just `q`.
