@@ -51,6 +51,12 @@ Simply type `quit` or just `q`.
 
 ## Debugging
 
-...
+```bash
+(gdb) lay src # shows source code
+
+(gdb) lay asm # shows assembly code
+
+(gdb) lay next # shows next layout based on what we're currently seeing -> we can also view the next layout by just hitting the Enter key
+```
 
 ---
