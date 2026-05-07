@@ -14,11 +14,11 @@ Writing a minimal implementation of a dynamic array in C, inspired by C++ STL's 
 
 ### Insertion (at the end)
 
-![s_push_back() design](./docs/rough-sketch/s_push_back_design.png)
+![s_push_back() design](./docs/design-sketches/s_push_back_design.png)
 
 ### Deletion (from the end)
 
-![s_pop_back() design](./docs/rough-sketch/s_pop_back_design.png)
+![s_pop_back() design](./docs/design-sketches/s_pop_back_design.png)
 
 ---
 
