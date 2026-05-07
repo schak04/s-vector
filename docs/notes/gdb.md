@@ -44,12 +44,22 @@ gcc -g -fsanitize=address main.c -o main
 
 ### Starting
 
-To start GDB, we simply type `gdb`. That gives a prompt that looks like this: `(gdb)`.
-
-Alternatively, we can start gdb and give it the name of the program executable that needs debugging:
+To start GDB normally, we simply type `gdb`.
 
 ```bash
-gdb main # or whatever the name of the executable is
+gdb
+```
+
+That opens up the GDB prompt:
+
+```bash
+(gdb)
+```
+
+We can also directly provide the executable:
+
+```bash
+gdb ./main # or whatever the name of the executable is
 ```
 
 > Once (gdb) appears, every time a command is used, it can be reused simply by hitting `Enter`.
