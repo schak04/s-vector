@@ -69,12 +69,20 @@ gdb ./main # or whatever the name of the executable is
 Simply type `quit` or just `q`.
 
 ```bash
-(gdb) quit
+(gdb) quit # shortcut -> q
 ```
-**or**
+
+---
+
+## Running Programs
 
 ```bash
-(gdb) q
+(gdb) run # runs program inside gdb (shortcut -> r)
+```
+
+Arguments can also be passed:
+```bash
+(gdb) run file.txt
 ```
 
 ---
@@ -82,19 +90,174 @@ Simply type `quit` or just `q`.
 ## Debugging
 
 ```bash
-(gdb) lay src # shows source code
-
-(gdb) lay asm # shows assembly code
-
-(gdb) lay next # shows next layout based on what we're currently seeing
-
-(gdb) run # runs program inside gdb
-
-(gdb) bt # backtrace (shows call stack) -> used when program crashes
-
-(gdb) next # steps over function
-(gdb) step # steps into function
-(gdb) finish # exits current function
+(gdb) layout src # shows source code layout (shortcut for layout -> lay)
+(gdb) lay asm # shows assembly code layout
+(gdb) lay next # shows next layout based on the current layout
 ```
+
+## Execution Control
+
+```bash
+(gdb) run
+(gdb) continue # continues execution after a pause or breakpoint (shortcut -> c)
+(gdb) next # steps over function (shprtcut -> n)
+(gdb) step # steps into function (shprtcut -> s)
+(gdb) finish # exits current function (shprtcut -> fin)
+(gdb) start # starts/restarts
+```
+
+## Backtrace and Stack Frames
+
+Very useful after crashes (like segfaults):
+```bash
+(gdb) bt # backtrace (shows call stack) -> used when program crashes
+```
+
+### Moving Between Stack Frames
+
+```bash
+(gdb) frame 0 # moves to frame 0 (usually where the crash occurred)
+
+(gdb) frame 1 # moves one level higher in the call stack
+```
+
+> shortcut -> f
+
+---
+
+## Breakpoints
+
+Breakpoints pause program execution at specific locations.
+
+### Break by Function
+
+```bash
+(gdb) break main # or whichever function (shortcut -> b)
+```
+
+### Break by Line Number
+
+```bash
+(gdb) break main.c:25 # 25th line in main.c file (not func)
+```
+
+### Deleting Breakpoints
+
+```bash
+(gdb) delete breakpoints # all
+(gdb) delete 1 # specific (1)
+```
+
+---
+
+## Inspecting Variables
+
+### Regular (Non-Pointer) Variables
+
+```bash
+(gdb) print varname # shortcut -> p
+```
+
+### Pointers
+
+```bash
+# address
+(gdb) print ptr # Example O/P: $1 = (int *) 0x0
+
+# value (by dereferencing the pointer)
+(gdb) print *ptr
+```
+
+### View Local Variables
+
+```bash
+(gdb) info locals # local vars in the current function
+```
+
+### View Function Arguments
+
+```bash
+(gdb) info args # args passed to the current function
+```
+
+---
+
+## Viewing Source Code
+
+```bash
+(gdb) list # source code near the current execution point
+
+(gdb) list main # listing a specific function (say, main)
+
+(gdb) list 20,40 # specific line ranges (20,40)
+```
+
+---
+
+## Examining Memory
+
+```bash
+(gdb) examine ptr # examines memory at the given address (shortcut -> x)
+```
+
+Example:
+
+```bash
+(gdb) x/4x ptr
+
+# Meaning:
+# examine 4 values, and
+# display them in hexadecimal.
+```
+
+### Common formats
+- x → hexadecimal
+- d → decimal
+- c → character
+- i → instruction
+- s → string
+
+---
+
+## Segmentation Fault Debugging
+
+A segmentation fault (SIGSEGV) usually means:
+- dereferencing an invalid pointer
+- dereferencing NULL
+- accessing memory out of bounds
+- use-after-free
+- stack corruption
+
+### Typical Debugging Process:
+
+```bash
+(gdb) run
+```
+and BOOM.  
+Program crashes -> signal `SIGSEGV`.
+
+Now what?
+
+**Inspect call stack:**
+```bash
+(gdb) bt
+```
+
+**Inspect variables:**
+```bash
+(gdb) info locals
+(gdb) print ptr
+```
+
+**Move through stack frames if needed:**
+```bash
+(gdb) frame 1
+```
+
+---
+
+## Core Dumps
+
+[Written Here](core-dump.md)
 
 ---
