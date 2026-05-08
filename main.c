@@ -7,9 +7,8 @@ Author: Saptaparno Chakraborty
 #include <stdlib.h>
 #define INITIAL_SIZE 0
 
-// components: data (ptr) + size + capacity
 struct s_vector {
-    int* data; // changes whenever the array needs resizing
+    int* data;
     size_t size;
     size_t capacity;
 };
@@ -34,57 +33,23 @@ void free_s_vector(struct s_vector* vec) {
 --- main s_vector functions ---
 */
 
-/*
-design decision for s_vector's cap and size while pushing back elements:
-    initially size -> 0
-    capacity -> 5
-every time,
-    until size == capacity, capacity doesn't change.
-    as soon as size == capacity -> cap = size + 5 again.
-*/
-
 void s_push_back(struct s_vector* vec, int val) {
     vec->size += 1;
     if (vec->size >= vec->capacity) {
         vec->capacity = vec->size + 5;
     }
-    /*
-    vec->size at index 0 = 1
-    vec->size at index x = x+1
-    so while pushing back,
-    idx = vec->size - 1 
-    */
-    *(vec->data + (vec->size - 1)) = val;
+    *(vec->data + (vec->size - 1)) = val; // vec->size at index x = x+1
 }
 
-/*
-design decision (popping from the back/end):
-    
-rambling... (deciding what to do as I type)
-say,
-    vec->data = {5, 6, 3, 2, 8, 4}
-    s_pop_back(vec) should remove 4
-    then again it should remove 8
-    and so on.
-    size -= 1, each time.
-    
-but how about capacity?
-    when vec = {5, 6, 3, 2, 8, 4}
-    size = 6, cap = 10 (say)
-
-then,
-    s_pop_back(vec) -> {5, 6, 3, 2, 8} => size -= 1 => size = 5.
-    if the diff between cap and size is >=5 then capacity -= 5, otherwise cap remains the same.
-    why? to reverse the pushing back logic for cap changes.
-*/
 void s_pop_back(struct s_vector* vec) {
     vec->size -= 1;
     if (vec->capacity - vec->size >= 5) {
         vec->capacity -= 5;
+        vec->data = realloc(vec->data, vec->capacity * sizeof(int));
     }
     // at this point, vec->data still has the element to be removed
-    // to remove it: maybe reallocation of memory?
-    // will try tomorrow
+    // removing it...
+    // yet to write the logic for removal    
 }
 
 int main() {
@@ -92,10 +57,13 @@ int main() {
     init(v);
 
     s_push_back(v, 4);
-    printf("%d\n", v->data[0]);
+    printf("%d\n", v->data[0]); // 4
+    s_push_back(v, 22);
+    printf("%d\n", v->data[1]); // 4, 22
     
     s_pop_back(v);
-    printf("%d\n", v->data[0]);
+    printf("%d\n", v->data[0]); // 4
+    printf("%d\n", v->data[1]); // nothing
     
     free_s_vector(v);
  
