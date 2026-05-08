@@ -17,13 +17,13 @@ struct s_vector {
 --- mem mgmt ---
 */
 
-void init(struct s_vector* vec) {
+void sv_init(struct s_vector* vec) {
     vec->size = INITIAL_SIZE;
     vec->capacity = 5;
     vec->data = (int*)malloc(vec->capacity * sizeof(int));
 }
 
-void free_s_vector(struct s_vector* vec) {
+void sv_free(struct s_vector* vec) {
     vec->size = 0;
     vec->capacity = 0;
     free(vec);
@@ -33,7 +33,7 @@ void free_s_vector(struct s_vector* vec) {
 --- main s_vector functions ---
 */
 
-void s_push_back(struct s_vector* vec, int val) {
+void sv_push_back(struct s_vector* vec, int val) {
     vec->size += 1;
     if (vec->size >= vec->capacity) {
         vec->capacity = vec->size + 5;
@@ -54,18 +54,18 @@ void s_pop_back(struct s_vector* vec) {
 
 int main() {
     struct s_vector* v = malloc(sizeof(struct s_vector));
-    init(v);
+    sv_init(v);
 
-    s_push_back(v, 4);
+    sv_push_back(v, 4);
     printf("%d\n", v->data[0]); // 4
-    s_push_back(v, 22);
+    sv_push_back(v, 22);
     printf("%d\n", v->data[1]); // 4, 22
     
     s_pop_back(v);
     printf("%d\n", v->data[0]); // 4
     printf("%d\n", v->data[1]); // nothing
     
-    free_s_vector(v);
+    sv_free(v);
  
     return 0;
 }
