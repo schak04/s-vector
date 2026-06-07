@@ -41,7 +41,7 @@ void sv_push_back(struct s_vector* vec, int val) {
     *(vec->data + (vec->size - 1)) = val; // vec->size at index x = x+1
 }
 
-void s_pop_back(struct s_vector* vec) {
+void sv_pop_back(struct s_vector* vec) {
     vec->size -= 1;
     if (vec->capacity - vec->size >= 5) {
         vec->capacity -= 5;
@@ -49,7 +49,7 @@ void s_pop_back(struct s_vector* vec) {
     }
     // at this point, vec->data still has the element to be removed
     // removing it...
-    // yet to write the logic for removal    
+    // yet to write the logic for removal
 }
 
 int main() {
@@ -60,11 +60,11 @@ int main() {
     printf("%d\n", v->data[0]); // 4
     sv_push_back(v, 22);
     printf("%d\n", v->data[1]); // 4, 22
-    
-    s_pop_back(v);
+
+    sv_pop_back(v);
     printf("%d\n", v->data[0]); // 4
     printf("%d\n", v->data[1]); // nothing
-    
+
     sv_free(v);
  
     return 0;
