@@ -26,7 +26,7 @@ void sv_init(struct s_vector* vec) {
 void sv_free(struct s_vector* vec) {
     vec->size = 0;
     vec->capacity = 0;
-    free(vec);
+    free(vec->data);
 }
 
 /*
