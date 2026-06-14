@@ -196,6 +196,8 @@ Breakpoints pause program execution at specific locations.
 
 ## Examining Memory
 
+> Written here in more details: [GDB Memory Inspection](https://github.com/schak04/s-ls/blob/main/docs/notes/gdb-memory-inspection.md)
+
 ```bash
 (gdb) examine ptr # examines memory at the given address (shortcut -> x)
 ```
