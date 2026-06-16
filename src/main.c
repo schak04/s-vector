@@ -49,8 +49,6 @@ void sv_pop_back(struct s_vector* vec) {
         vec->capacity -= 5;
         vec->data = realloc(vec->data, vec->capacity * sizeof(int));
     }
-    // at this point, vec->data still has the element to be removed
-    // yet to write the logic for removal
 }
 
 int main() {
