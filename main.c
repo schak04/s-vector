@@ -42,6 +42,8 @@ void sv_push_back(struct s_vector* vec, int val) {
 }
 
 void sv_pop_back(struct s_vector* vec) {
+    if (vec->size == 0) return;
+
     vec->size -= 1;
     if (vec->capacity - vec->size >= 5) {
         vec->capacity -= 5;
