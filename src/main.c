@@ -37,6 +37,7 @@ void sv_push_back(struct s_vector* vec, int val) {
     vec->size += 1;
     if (vec->size >= vec->capacity) {
         vec->capacity = vec->size + 5;
+        vec->data = realloc(vec->data, vec->capacity * sizeof(int));
     }
     *(vec->data + (vec->size - 1)) = val;  // vec->size at index x = x+1
 }
