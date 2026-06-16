@@ -37,7 +37,7 @@ void sv_push_back(struct s_vector* vec, int val) {
     vec->size += 1;
     if (vec->size >= vec->capacity) {
         vec->capacity = vec->size + 5;
-        vec->data = realloc(vec->data, vec->capacity * sizeof(int));
+        vec->data = (int*)realloc(vec->data, vec->capacity * sizeof(int));
     }
     *(vec->data + (vec->size - 1)) = val;  // vec->size at index x = x+1
 }
@@ -48,12 +48,12 @@ void sv_pop_back(struct s_vector* vec) {
     vec->size -= 1;
     if (vec->capacity - vec->size >= 5) {
         vec->capacity -= 5;
-        vec->data = realloc(vec->data, vec->capacity * sizeof(int));
+        vec->data = (int*)realloc(vec->data, vec->capacity * sizeof(int));
     }
 }
 
 int main() {
-    struct s_vector* v = malloc(sizeof(struct s_vector));
+    struct s_vector* v = (struct s_vector*)malloc(sizeof(struct s_vector));
     sv_init(v);
 
     sv_push_back(v, 4);
