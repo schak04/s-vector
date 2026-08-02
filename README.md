@@ -1,6 +1,6 @@
 # s-vector
 
-Writing a minimal implementation of a dynamic array in C, inspired by C++ STL's `std::vector`.
+This project is a minimal implementation of a dynamic integer array in C, inspired by C++ STL's `std::vector`.
 
 ## Naming
 
