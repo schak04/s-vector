@@ -8,20 +8,6 @@ Writing a minimal implementation of a dynamic array in C, inspired by C++ STL's 
 
 ---
 
-## Design
-
-> Integer-only for now, for the sake of simplicity.
-
-### Insertion (at the end)
-
-![sv_push_back() design](./docs/design-sketches/sv_push_back_design.png)
-
-### Deletion (from the end)
-
-![sv_pop_back() design](./docs/design-sketches/sv_pop_back_design.png)
-
----
-
 ## Naming
 
 All the functions use the `sv_` prefix (e.g., `sv_init`, `sv_push_back`, `sv_pop_back`, `sv_free`).  
@@ -31,6 +17,7 @@ All the functions use the `sv_` prefix (e.g., `sv_init`, `sv_push_back`, `sv_pop
 Since C has no namespaces, a generic name like `push_back` (like C++'s `std::vector`) could collide with other libraries or my future programs.
 
 So, the prefix:
+
 - Avoids any conflicts.
 - Makes the functions' duty obvious (as they work on my `s_vector`).
 
