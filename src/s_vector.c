@@ -3,14 +3,10 @@ s-vector
 Author: Saptaparno Chakraborty
 */
 
+#include "s_vector.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-
-struct s_vector {
-    int* data;
-    size_t size;
-    size_t capacity;
-};
 
 /*
 --- mem mgmt ---
@@ -73,21 +69,4 @@ void sv_pop_back(struct s_vector* vec) {
         vec->data = tmp;
         vec->capacity = new_capacity;
     }
-}
-
-int main() {
-    struct s_vector v;
-    sv_init(&v);
-
-    sv_push_back(&v, 4);
-    printf("%d\n", v.data[0]);  // 4
-    sv_push_back(&v, 22);
-    printf("%d\n", v.data[1]);  // 4, 22
-
-    sv_pop_back(&v);
-    printf("%d\n", v.data[0]);  // 4
-
-    sv_free(&v);
-
-    return 0;
 }
