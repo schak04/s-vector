@@ -5,7 +5,6 @@ Author: Saptaparno Chakraborty
 
 #include <stdio.h>
 #include <stdlib.h>
-#define INITIAL_SIZE 0
 
 struct s_vector {
     int* data;
@@ -18,15 +17,21 @@ struct s_vector {
 */
 
 void sv_init(struct s_vector* vec) {
-    vec->size = INITIAL_SIZE;
+    vec->size = 0;
     vec->capacity = 5;
     vec->data = (int*)malloc(vec->capacity * sizeof(int));
+
+    if (!vec->data) {
+        fprintf(stderr, "Failed to allocate memory.\n");
+        vec->capacity = 0;
+    }
 }
 
 void sv_free(struct s_vector* vec) {
     vec->size = 0;
     vec->capacity = 0;
     free(vec->data);
+    vec->data = NULL;
 }
 
 /*
@@ -34,38 +39,55 @@ void sv_free(struct s_vector* vec) {
 */
 
 void sv_push_back(struct s_vector* vec, int val) {
-    vec->size += 1;
     if (vec->size >= vec->capacity) {
-        vec->capacity = vec->size + 5;
-        vec->data = (int*)realloc(vec->data, vec->capacity * sizeof(int));
+        size_t new_capacity = vec->capacity + 5;
+
+        int* tmp = (int*)realloc(vec->data, new_capacity * sizeof(int));
+        if (!tmp) {
+            fprintf(stderr, "Failed to reallocate memory.\n");
+            return;
+        }
+
+        vec->data = tmp;
+        vec->capacity = new_capacity;
     }
-    *(vec->data + (vec->size - 1)) = val;  // vec->size at index x = x+1
+
+    vec->data[vec->size] = val;
+    vec->size++;
 }
 
 void sv_pop_back(struct s_vector* vec) {
     if (vec->size == 0) return;
 
-    vec->size -= 1;
-    if (vec->capacity - vec->size >= 5) {
-        vec->capacity -= 5;
-        vec->data = (int*)realloc(vec->data, vec->capacity * sizeof(int));
+    vec->size--;
+
+    if (vec->capacity > 5 && (vec->capacity - vec->size) >= 5) {
+        size_t new_capacity = vec->capacity - 5;
+
+        int* tmp = (int*)realloc(vec->data, new_capacity * sizeof(int));
+        if (!tmp) {
+            fprintf(stderr, "Failed to reallocate memory.\n");
+            return;
+        }
+
+        vec->data = tmp;
+        vec->capacity = new_capacity;
     }
 }
 
 int main() {
-    struct s_vector* v = (struct s_vector*)malloc(sizeof(struct s_vector));
-    sv_init(v);
+    struct s_vector v;
+    sv_init(&v);
 
-    sv_push_back(v, 4);
-    printf("%d\n", v->data[0]);  // 4
-    sv_push_back(v, 22);
-    printf("%d\n", v->data[1]);  // 4, 22
+    sv_push_back(&v, 4);
+    printf("%d\n", v.data[0]);  // 4
+    sv_push_back(&v, 22);
+    printf("%d\n", v.data[1]);  // 4, 22
 
-    sv_pop_back(v);
-    printf("%d\n", v->data[0]);  // 4
-    printf("%d\n", v->data[1]);  // nothing
+    sv_pop_back(&v);
+    printf("%d\n", v.data[0]);  // 4
 
-    sv_free(v);
+    sv_free(&v);
 
     return 0;
 }
